@@ -13,6 +13,8 @@ internal class SpellLevel : IDrawing
 
     public Point Origin => new Point(50, 50);
 
+    public string Name => $"Spell Level {Level}";
+
     public int Level { get; private init; }
 
     public SpellLevel(int level)

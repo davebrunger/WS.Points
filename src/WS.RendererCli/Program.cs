@@ -1,55 +1,26 @@
-const string OutputFileName = "image.png";
+/*
+ CLI entry point that renders a sample IDrawing to a PNG file using SkiaSharp.
+ Locates the repository root, creates an `output` directory and writes the drawing to the
+ filename suggested by the drawing's OutputFileName.
+*/
+using WS.RendererCli;
 
-var solutionRoot = FindSolutionRoot();
-if (solutionRoot is null)
-{
-    Console.Error.WriteLine("Solution root not found. Saving output to current directory.");
-    solutionRoot = Directory.GetCurrentDirectory();
-}
-
+var solutionRoot = Utilities.FindSolutionRoot();
 var outputDir = Path.Combine(solutionRoot, "output");
 Directory.CreateDirectory(outputDir);
 
-var outputPath = Path.Combine(outputDir, OutputFileName);
-
-using var bitmap = DrawShapes(new SpellLevel(4));
-
-// Encode and save as PNG
-using var image = SKImage.FromBitmap(bitmap);
-using var data = image.Encode(SKEncodedImageFormat.Png, 100);
-using var fs = File.OpenWrite(outputPath);
-data.SaveTo(fs);
-
-Console.WriteLine($"Saved image to {outputPath}");
-
-SKBitmap DrawShapes(IDrawing drawing)
+for (int level = 0; level <= 9; level++)
 {
-    var bitmap = new SKBitmap(drawing.WidthPixels, drawing.HeightPixels, SKColorType.Rgba8888, SKAlphaType.Premul);
-    using var canvas = new SKCanvas(bitmap);
-
-    // Clear to transparent
-    canvas.Clear(SKColors.Transparent);
-
-    var renderer = new SkiaRenderer(canvas, drawing.Origin);
+    IDrawing drawing = new SpellLevel(level);
     
-    foreach (var shape in drawing.Shapes)
+    var outputPath = drawing.SaveAsPng((fileName, extension) =>
     {
-        shape.Draw(renderer);
-    }
+        var sanitizedFileName = Utilities.SanitizeFileName(fileName, extension);
+        var outputPath = Path.Combine(outputDir, sanitizedFileName);
+        return (outputPath, new FileStream(outputPath, FileMode.Create, FileAccess.Write));
+    });
 
-    // (debug pixel sampling removed)
-
-    return bitmap;
+    Console.WriteLine($"Saved image to {outputPath}");
 }
 
-string? FindSolutionRoot()
-{
-    var dir = new DirectoryInfo(Directory.GetCurrentDirectory());
-    for (int i = 0; i < 6 && dir != null; i++)
-    {
-        var sln = Path.Combine(dir.FullName, "WS.Points.slnx");
-        if (File.Exists(sln)) return dir.FullName;
-        dir = dir.Parent;
-    }
-    return null;
-}
+Console.WriteLine("Done");
