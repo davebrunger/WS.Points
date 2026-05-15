@@ -52,7 +52,10 @@ public class FileUtilities
     {
         var fileName = name;
         fileName = fileSystem.Path.GetFileName(fileName) ?? fileName;
-        if (string.IsNullOrWhiteSpace(fileName)) fileName = "image";
+        if (string.IsNullOrWhiteSpace(fileName))
+        {
+            fileName = "image";
+        }
         var invalidChars = fileSystem.Path.GetInvalidFileNameChars();
         fileName = string.Concat(fileName.Split(invalidChars, StringSplitOptions.RemoveEmptyEntries));
         if (!fileName.EndsWith($".{extension}", StringComparison.OrdinalIgnoreCase))

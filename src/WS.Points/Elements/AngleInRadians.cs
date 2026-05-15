@@ -35,7 +35,10 @@ public record AngleInRadians
     {
         var twoPi = 2.0 * Math.PI;
         var v = value % twoPi;
-        if (v < 0) v += twoPi;
+        if (v < 0)
+        {
+            v += twoPi;
+        }
         return v;
     }
     

@@ -10,16 +10,24 @@ Directory.CreateDirectory(outputDir);
 
 for (int level = 0; level <= 9; level++)
 {
-    IDrawing drawing = new SpellLevel(level);
-
-    var outputPath = drawing.SaveAsPng((fileName, extension) =>
+    foreach (var school in Enum.GetValues<School>())
     {
-        var sanitizedFileName = fileUtilities.SanitizeFileName(fileName, extension);
-        var outputPath = Path.Combine(outputDir, sanitizedFileName);
-        return (outputPath, (Stream)new FileStream(outputPath, FileMode.Create, FileAccess.Write));
-    });
+        if (level < 9)
+        {
+            continue; // For now, only render level 9 spells until the drawing is more fully featured
+        }
 
-    Console.WriteLine($"Saved image to {outputPath}");
+        IDrawing drawing = new SpellLevel(level, school);
+
+        var outputPath = drawing.SaveAsPng((fileName, extension) =>
+        {
+            var sanitizedFileName = fileUtilities.SanitizeFileName(fileName, extension);
+            var outputPath = Path.Combine(outputDir, sanitizedFileName);
+            return (outputPath, (Stream)new FileStream(outputPath, FileMode.Create, FileAccess.Write));
+        });
+
+        Console.WriteLine($"Saved image to {outputPath}");
+    }
 }
 
 Console.WriteLine("Done");

@@ -38,9 +38,14 @@ public record Ellipse : IShape
     public Ellipse(Point centre, Vector majorAxisDirection, double majorRadius, double minorRadius)
     {
         if (majorAxisDirection.X == 0.0 && majorAxisDirection.Y == 0.0)
+        {
             throw new ArgumentException("Major axis direction must be non-zero.");
+        }
+
         if (majorRadius <= 0.0 || minorRadius <= 0.0)
+        {
             throw new ArgumentException("Radii must be positive.");
+        }
 
         Centre = centre;
         MajorAxisDirection = majorAxisDirection.Unit();

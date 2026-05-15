@@ -8,3 +8,4 @@ global using WS.Points.Drawing;
 global using WS.Points.Elements;
 global using WS.RendererCli;
 global using WS.RendererCli.Drawings;
+global using WS.RendererCli.Models;
