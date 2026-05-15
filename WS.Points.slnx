@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/WS.Points/WS.Points.csproj" />
+    <Project Path="src/WS.SkiaPoints/WS.SkiaPoints.csproj" />
+    <Project Path="src/WS.RendererCli/WS.RendererCli.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/WS.Points.Tests/WS.Points.Tests.csproj" />
+    <Project Path="test/WS.SkiaPoints.Tests/WS.SkiaPoints.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,80 @@
+# Visual Studio / .NET
+.vs/
+.vscode/
+**/bin/
+**/obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.nupkg
+*.snupkg
+*.dotCover
+*.userprefs
+project.lock.json
+**/packages/
+*.pidb
+*.svclog
+*.pdb
+*.mdb
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Build results
+*.app
+*.apk
+*.aab
+*.xap
+*.exe
+*.dll
+*.so
+*.dylib
+
+# NuGet
+*.nupkg
+# NuGet v3
+.project.lock.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Test results
+TestResults/
+coverage*/
+coverage.xml
+
+# Temporary
+*.tmp
+*.temp
+~$*
+
+# VS Code workspace storage
+.history/
+
+# Generated image output
+/output/
+
+# Node
+node_modules/
+
+# Misc
+*.class
+*.jar
+
+# Ignore user-specific local secrets or credentials
+.secretstore/
+
+# Ignore files created by dotnet user-secrets
+secrets.json
+
+# Ignore local tool caches
+.terraform/
+
+# End of file
