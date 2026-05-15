@@ -6,6 +6,7 @@
   </Folder>
   <Folder Name="/test/">
     <Project Path="test/WS.Points.Tests/WS.Points.Tests.csproj" />
+    <Project Path="test/WS.RendererCli.Tests/WS.RendererCli.Tests.csproj" />
     <Project Path="test/WS.SkiaPoints.Tests/WS.SkiaPoints.Tests.csproj" />
   </Folder>
 </Solution>
