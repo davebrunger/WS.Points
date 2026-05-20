@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\WS.SkiaPoints\WS.SkiaPoints.csproj" />
+    <ProjectReference Include="..\..\src\WS.SkiaDrawing\WS.SkiaDrawing.csproj" />
     <ProjectReference Include="..\..\src\WS.Points\WS.Points.csproj" />
   </ItemGroup>
 

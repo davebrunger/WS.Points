@@ -1,8 +1,3 @@
-using System.Collections.Generic;
-using System.IO.Abstractions.TestingHelpers;
-using WS.RendererCli;
-using Xunit;
-
 namespace WS.RendererCli.Tests;
 
 public class FileUtilitiesTests

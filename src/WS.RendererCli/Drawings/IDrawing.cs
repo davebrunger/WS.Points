@@ -23,7 +23,7 @@ public interface IDrawing
     /// <summary>
     /// Shapes that make up this drawing.
     /// </summary>
-    IEnumerable<Shape> Shapes { get; }
+    IEnumerable<IDrawable> Shapes { get; }
 
     /// <summary>
     /// Suggested output filename for the drawing. May include directory components;

@@ -1,4 +1,4 @@
-namespace WS.Points.Elements;
+namespace WS.Points;
 
 /// <summary>
 /// Context passed to elements when they are asked to draw themselves by a higher-level shape.

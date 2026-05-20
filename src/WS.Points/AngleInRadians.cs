@@ -1,4 +1,4 @@
-namespace WS.Points.Elements;
+namespace WS.Points;
 
 /// <summary>
 /// Represents an angle in radians and normalizes to the range [0, 2π).

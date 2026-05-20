@@ -1,4 +1,4 @@
-namespace WS.Points.Elements;
+namespace WS.Points;
 
 /// <summary>
 /// Common interface for geometric shapes that support basic transforms and drawing.

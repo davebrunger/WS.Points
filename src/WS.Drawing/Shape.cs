@@ -1,4 +1,4 @@
-namespace WS.Points.Drawing;
+namespace WS.Drawing;
 
 /// <summary>
 /// Represents a drawable shape combining an <see cref="IShape"/> element with stroke and fill parameters.
@@ -7,7 +7,7 @@ namespace WS.Points.Drawing;
 /// <param name="StrokeWidth">Stroke width used when drawing the element.</param>
 /// <param name="StrokeColour">Stroke colour.</param>
 /// <param name="FillColour">Fill colour.</param>
-public record Shape(IShape Element, double StrokeWidth, Colour StrokeColour, Colour FillColour)
+public record Shape(IShape Element, double StrokeWidth, Colour StrokeColour, Colour FillColour) : IDrawable
 {
     /// <summary>
     /// Scales the underlying element. By default the shape's <see cref="StrokeWidth"/> is scaled
@@ -83,12 +83,12 @@ public record Shape(IShape Element, double StrokeWidth, Colour StrokeColour, Col
     /// <param name="strokeColour">Stroke colour.</param>
     /// <param name="fillColour">Fill colour.</param>
     /// <param name="points">Points that make up the polygon, in order.</param>
-    /// <returns>A new <see cref="Shape"/> wrapping a <see cref="WS.Points.Elements.Polygon"/> element.</returns>
+    /// <returns>A new <see cref="Shape"/> wrapping a <see cref="Points.Polygon"/> element.</returns>
     public static Shape Polygon(double strokeWidth, Colour strokeColour, Colour fillColour, params Point[] points)
     {
         var polygon = new Polygon(points.ToImmutableList());
         return new Shape(polygon, strokeWidth, strokeColour, fillColour);
-    }   
+    }
     /// <summary>
     /// Creates a polygon shape from the provided points.
     /// </summary>
@@ -96,7 +96,7 @@ public record Shape(IShape Element, double StrokeWidth, Colour StrokeColour, Col
     /// <param name="strokeColour">Stroke colour.</param>
     /// <param name="fillColour">Fill colour.</param>
     /// <param name="points">Sequence of points that make up the polygon, in order.</param>
-    /// <returns>A new <see cref="Shape"/> wrapping a <see cref="WS.Points.Elements.Polygon"/> element.</returns>
+    /// <returns>A new <see cref="Shape"/> wrapping a <see cref="Points.Polygon"/> element.</returns>
     public static Shape Polygon(double strokeWidth, Colour strokeColour, Colour fillColour, IEnumerable<Point> points)
     {
         var polygon = new Polygon(points.ToImmutableList());
@@ -110,10 +110,10 @@ public record Shape(IShape Element, double StrokeWidth, Colour StrokeColour, Col
     /// <param name="fillColour">Fill colour.</param>
     /// <param name="radius">Circumradius of the regular polygon.</param>
     /// <param name="sides">Number of sides (must be &gt;= 3).</param>
-    /// <returns>A new <see cref="Shape"/> wrapping a regular <see cref="WS.Points.Elements.Polygon"/> element.</returns>
+    /// <returns>A new <see cref="Shape"/> wrapping a regular <see cref="Points.Polygon"/> element.</returns>
     public static Shape RegularPolygon(double strokeWidth, Colour strokeColour, Colour fillColour, double radius, int sides)
     {
-        return new Shape(Elements.Polygon.RegularPolygon(radius, sides), strokeWidth, strokeColour, fillColour);
+        return new Shape(WS.Points.Polygon.RegularPolygon(radius, sides), strokeWidth, strokeColour, fillColour);
     }   
 
     /// <summary>
@@ -179,7 +179,7 @@ public record Shape(IShape Element, double StrokeWidth, Colour StrokeColour, Col
     /// Draws this shape using the provided <see cref="IDrawingContext"/>.
     /// </summary>
     /// <param name="context">Drawing context to use for rendering.</param>
-    public void Draw(IDrawingContext context)
+    public virtual void Draw(IDrawingContext context)
     {
         Element.Draw(new DrawingElementContext(context, StrokeWidth, StrokeColour, FillColour));
     }

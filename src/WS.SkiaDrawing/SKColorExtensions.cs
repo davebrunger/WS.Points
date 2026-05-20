@@ -1,7 +1,7 @@
 namespace WS.SkiaPoints;
 
 /// <summary>
-/// Helpers to convert between WS.Points <see cref="WS.Points.Drawing.Colour"/> and Skia's <see cref="SKColor"/>.
+/// Helpers to convert between WS.Points <see cref="WS.Drawing.Colour"/> and Skia's <see cref="SKColor"/>.
 /// </summary>
 public static class SKColorExtensions
 {

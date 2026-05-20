@@ -1,4 +1,4 @@
-namespace WS.Points.Elements;
+namespace WS.Points;
 
 /// <summary>
 /// Represents a polygon as an immutable list of vertices.

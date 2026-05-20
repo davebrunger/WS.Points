@@ -1,4 +1,4 @@
-namespace WS.Points.Elements;
+namespace WS.Points;
 
 /// <summary>
 /// Represents a general ellipse defined by two radius vectors from the centre.

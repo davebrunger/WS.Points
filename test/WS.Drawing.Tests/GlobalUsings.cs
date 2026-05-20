@@ -1,5 +1,5 @@
-global using SkiaSharp;
+global using System;
+global using Xunit;
 
 // Project namespaces
 global using WS.Drawing;
-global using WS.Points;

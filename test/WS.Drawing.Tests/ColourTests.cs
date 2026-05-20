@@ -1,8 +1,4 @@
-using System;
-using WS.Points.Drawing;
-using Xunit;
-
-namespace WS.Points.Tests;
+namespace WS.Drawing.Tests;
 
 public class ColourTests
 {

@@ -1,4 +1,4 @@
-namespace WS.Points.Drawing;
+namespace WS.Drawing;
 
 /// <summary>
 /// Common predefined <see cref="Colour"/> instances for convenience.

@@ -5,14 +5,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-  <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <WarningsAsErrors>$(WarningsAsErrors);1591</WarningsAsErrors>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="3.119.2" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WS.Points\WS.Points.csproj" />

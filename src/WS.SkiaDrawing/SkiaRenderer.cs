@@ -72,7 +72,8 @@ public class SkiaRenderer : IDrawingContext
         {
             Style = SKPaintStyle.Fill,
             Color = fillColour.ToSKColor(),
-            BlendMode = SKBlendMode.Src
+            BlendMode = SKBlendMode.Src,
+            IsAntialias = true
         };
 
         using var strokePaint = new SKPaint
@@ -81,7 +82,8 @@ public class SkiaRenderer : IDrawingContext
             Color = strokeColour.ToSKColor(),
             StrokeWidth = (float)strokeWidth,
             IsStroke = true,
-            BlendMode = SKBlendMode.Src
+            BlendMode = SKBlendMode.Src,
+            IsAntialias = true
         };
 
         canvas.Save();
@@ -138,6 +140,8 @@ public class SkiaRenderer : IDrawingContext
         {
             Style = SKPaintStyle.Fill,
             Color = fillColour.ToSKColor(),
+            BlendMode = SKBlendMode.Src,
+            IsAntialias = true
         };
 
         using var strokePaint = new SKPaint
@@ -146,6 +150,8 @@ public class SkiaRenderer : IDrawingContext
             Color = strokeColour.ToSKColor(),
             StrokeWidth = (float)strokeWidth,
             IsStroke = true,
+            BlendMode = SKBlendMode.Src,
+            IsAntialias = true
         };
 
         // Apply origin transform so polygon coordinates (which are y-positive-up)
@@ -158,6 +164,50 @@ public class SkiaRenderer : IDrawingContext
         {
             canvas.DrawPath(path, strokePaint);
         }
+        canvas.Restore();
+    }
+
+    /// <summary>
+    /// Draws text centered at the specified location using the configured Skia canvas.
+    /// </summary>
+    /// <param name="text">Text to render.</param>
+    /// <param name="centre">Centre point (in y-positive-up coordinates) where the text will be placed.</param>
+    /// <param name="fontSizeInPixels">Font size in pixels to use when rendering the text.</param>
+    /// <param name="strokeColour">Colour to use for the rendered text.</param>
+    /// <param name="style">The style of the text.</param>
+    public void DrawText(string text, Point centre, float fontSizeInPixels, Colour strokeColour, TextStyle style)
+    {
+        using var paint = new SKPaint
+        {
+            Style = SKPaintStyle.Fill,
+            Color = strokeColour.ToSKColor(),
+            BlendMode = SKBlendMode.Src,
+            IsAntialias = true,
+        };
+
+        var font = new SKFont
+        {
+            // Note that although SKFont documentation describes Size as "The size of the font in points", in practice 
+            // it appears to render at the specified pixel size. This matches our expectation since the WS.Points API 
+            // specifies font size in pixels.
+            Size = fontSizeInPixels,
+                Typeface = style switch
+                {
+                    TextStyle s when s.HasFlag(TextStyle.Bold) && s.HasFlag(TextStyle.Italic) => SKTypeface.FromFamilyName(null, SKFontStyle.BoldItalic),
+                    TextStyle s when s.HasFlag(TextStyle.Bold) => SKTypeface.FromFamilyName(null, SKFontStyle.Bold),
+                    TextStyle s when s.HasFlag(TextStyle.Italic) => SKTypeface.FromFamilyName(null, SKFontStyle.Italic),
+                    _ => SKTypeface.FromFamilyName(null, SKFontStyle.Normal)
+                }
+        };
+        
+        var yOffset = font.Metrics.CapHeight / 2;
+        canvas.Save();
+        canvas.Translate(originCanvasX, originCanvasY + yOffset);
+        
+        // We want to render text with y-positive-up coordinates, but Skia's DrawText doesn't support arbitrary transforms 
+        // like DrawPath does, so we need to flip the text ourselves by negating the Y coordinate.
+        canvas.DrawText(text, (float)centre.X, -(float)centre.Y, SKTextAlign.Center, font, paint);
+
         canvas.Restore();
     }
 }

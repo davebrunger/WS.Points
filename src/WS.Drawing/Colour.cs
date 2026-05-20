@@ -1,4 +1,4 @@
-namespace WS.Points.Drawing;
+namespace WS.Drawing;
 
 /// <summary>
 /// Represents an RGBA colour with 8-bit channels.

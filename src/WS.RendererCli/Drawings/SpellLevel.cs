@@ -28,7 +28,7 @@ internal class SpellLevel : IDrawing
         School = school;
     }
 
-    public IEnumerable<Shape> Shapes
+    public IEnumerable<IDrawable> Shapes
     {
         get
         {
@@ -46,6 +46,7 @@ internal class SpellLevel : IDrawing
             yield return Shape.Circle(0, Colours.Black, School.ToColour(), 36.0);
             yield return Shape.Circle(0, Colours.Black, Colours.Transparent, 24.0);
             yield return Shape.Circle(0, Colours.Black, School.ToColour(), 12.0);
+            yield return Shape.Circle(0, Colours.Black, Colours.Blue, 4.0).Translate(new Vector(0, 24.0));
         }
     }
 }

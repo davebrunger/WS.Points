@@ -1,3 +1,4 @@
+// Third-party
 global using SkiaSharp;
 
 // Project namespaces
