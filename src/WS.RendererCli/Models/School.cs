@@ -37,14 +37,14 @@ public static class SchoolExtensions
     {
         return school switch
         {
-            School.Abjuration => Colours.LightBlue,
-            School.Conjuration => Colours.Gold,
-            School.Divination => Colours.Cyan,
-            School.Enchantment => Colours.Violet,
-            School.Evocation => Colours.IndianRed,
-            School.Illusion => Colours.MediumPurple,
-            School.Necromancy => Colours.LightGreen,
-            School.Transmutation => Colours.LightSalmon,
+            School.Abjuration => new Colour(102, 165, 230),
+            School.Conjuration => new Colour(228, 129, 47),
+            School.Divination => new Colour(152, 185, 205),
+            School.Enchantment => new Colour(239, 143, 213),
+            School.Evocation => new Colour(209, 108, 92),
+            School.Illusion => new Colour(186, 154, 248),
+            School.Necromancy => new Colour(181, 237, 129),
+            School.Transmutation => new Colour(235, 153, 93),
             _ => throw new ArgumentOutOfRangeException(nameof(school), $"Unknown school: {school}")
         };
     }

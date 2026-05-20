@@ -1,5 +1,3 @@
-using System.IO.Abstractions;
-
 namespace WS.RendererCli;
 
 /// <summary>
