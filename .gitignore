@@ -77,4 +77,7 @@ secrets.json
 # Ignore local tool caches
 .terraform/
 
+# Ignore local cache files created by various tools
+*.lscache
+
 # End of file
